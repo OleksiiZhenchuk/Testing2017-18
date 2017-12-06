@@ -55,15 +55,15 @@ public class GoogleTest {
             int index = page.getIndexOf(testAim);
             if (index>=0) {
                 System.out.println("page " + pageOfResult);
-                Assert.assertTrue(testName.equals("test3"));
+                Assert.assertFalse(testName.equals("test3"));
                 break;
             }
-            else if (testName.equals("test1")){
+            else if(testName.equals("test1")){
                 Assert.fail("No matches on 1st page");
             }
             else if(page.isEnd()){
                 System.out.println(testAim+" not found!");
-                Assert.assertTrue(testName.equals("test2"));
+                Assert.assertFalse(testName.equals("test2"));
                 break;
             }
             else
