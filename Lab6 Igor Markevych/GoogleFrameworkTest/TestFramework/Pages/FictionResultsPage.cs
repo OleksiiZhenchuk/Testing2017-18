@@ -44,7 +44,7 @@ namespace TestFramework.Pages
 
         public bool ContainsOrgName(int i, string orgname)
         {
-            return 0==Links[i].Text.IndexOf(orgname+".") || Links[i].Text.Contains("."+orgname+".") || Links[i].Text.Contains("/" + orgname + ".");
+            return (0==Links[i].Text.IndexOf(orgname+".") || Links[i].Text.Contains("."+orgname+".") || Links[i].Text.Contains("/" + orgname + "."))&&!Links[i].Text.Contains("..."+orgname+"...");    
         }
 
         public bool IsOnPage (string name)
