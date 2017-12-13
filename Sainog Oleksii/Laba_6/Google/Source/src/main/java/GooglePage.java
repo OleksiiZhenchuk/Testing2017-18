@@ -2,13 +2,14 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.io.File;
 import java.util.List;
 
 class GooglePage{
 
-    private WebDriver driver;
+    private ExpandedChromeDriver driver;
 
-    GooglePage(WebDriver new_driver){
+    GooglePage(ExpandedChromeDriver new_driver){
         driver = new_driver;
         PageFactory.initElements(driver,this);
     }
@@ -22,18 +23,21 @@ class GooglePage{
     @FindBy(className = "g")
     private List<WebElement> paragraphs;
 
+    @FindBy(css= "#fprs > a.spell_orig")
+    private WebElement spell;
+
     @FindBy(id = "lst-ib")
     private WebElement searchField;
 
 
-    public boolean isExisting(WebElement elem) {
+    boolean isExisting(WebElement elem) {
         try {
             elem.isDisplayed();
             return true;
         } catch (NoSuchElementException ex) {return false; }
     }
 
-    public void inputRequest(String request){
+    void inputRequest(String request){
         searchField.sendKeys(request);
         searchField.sendKeys(Keys.ENTER);
     }
@@ -43,19 +47,29 @@ class GooglePage{
     }
 
     WebElement getSearchField() {return searchField;}
+    WebElement getSpell() {return spell;}
 
-    public boolean hasNextPage(){
+     boolean hasNextPage(){
         return isExisting(nextPageButton);
     }
 
-    public GooglePage nextPage(){
+    GooglePage nextPage(){
         if (isExisting(nextPageButton)) nextPageButton.click();
         return new GooglePage(driver);
     }
 
-    public boolean isInPage(String company){
+    boolean isInPage(String company){
         for(WebElement iter: paragraphs)
-            if (iter.getText().contains(company)) return true;
+            if (iter
+                    .getText().toUpperCase()
+                            .contains(
+                                    company.toUpperCase()
+                            )
+                ) return true;
         return false;
+    }
+
+    File getScreenshot() throws Exception{
+        return driver.getFullScreenshotAs(OutputType.FILE);
     }
 }
