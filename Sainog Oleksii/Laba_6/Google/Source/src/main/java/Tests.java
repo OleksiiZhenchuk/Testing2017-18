@@ -32,14 +32,6 @@ public class Tests {
         output = new FileWriter(directory + file, true);
     }
 
-    @BeforeClass
-    public static void begin() throws Exception {
-        String exePath = "c:\\Program Files (x86)\\Google\\Chrome\\chromedriver.exe";
-        System.setProperty("webdriver.chrome.driver", exePath);
-        driver = new ExpandedChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    }
-
     private void makeScreenshot(File file, String directory, String name) throws  IOException{
         FileUtils.copyFile(
                 file,
@@ -59,6 +51,19 @@ public class Tests {
         output.write(str + "\n");
         makeScreenshot(page.getScreenshot(), directory, str);
         return true;
+    }
+
+    @BeforeClass
+    public static void begin() throws Exception {
+        String exePath = "c:\\Program Files (x86)\\Google\\Chrome\\chromedriver.exe";
+        System.setProperty("webdriver.chrome.driver", exePath);
+        driver = new ExpandedChromeDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+
+    @Before
+    public void before(){
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @Test
@@ -82,6 +87,7 @@ public class Tests {
                     result = isFound && print(page);
             }
         }
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         if (!isFound && result) {
             for(int i = 0; i < screenshots.size(); i++)
                 makeScreenshot(
@@ -93,6 +99,7 @@ public class Tests {
         }
         assertTrue(result);
         output.close();
+
     }
 
     @AfterClass
