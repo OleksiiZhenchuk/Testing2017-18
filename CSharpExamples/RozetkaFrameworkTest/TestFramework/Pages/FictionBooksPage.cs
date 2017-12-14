@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 namespace TestFramework.Pages
 {
-    public class FictionBooksPage : BasePage
+    public class FilterPage : BasePage
     {
-        public FictionBooksPage(IWebDriver driver) : base(driver)
+        public FilterPage(IWebDriver driver) : base(driver)
         { }
 
         [FindsBy(How = How.Id, Using = "price[min]")]
@@ -27,32 +27,19 @@ namespace TestFramework.Pages
         public Button FilterByPrice => new Button(_filterByPrice);
 
 
-        public FictionBooksPage SetMinimumPrice(int? price)
+        public FilterPage SetMinimumPrice(int? price)
         {
             if (price == null) return this;
             MinimumPrice.SetValue(price.ToString());
             return this;
         }
 
-        public FictionBooksPage SetMaximumPrice(int? price)
+        public FilterPage SetMaximumPrice(int? price)
         {
             if (price == null) return this;
             MaximumPrice.SetValue(price.ToString());
             return this;
-        }
-
-        public FictionBooksPage SetPrice(int? MinPrice, int? MaxPrice)
-        {
-            SetMinimumPrice(MinPrice);
-            SetMaximumPrice(MaxPrice);
-            return this;
-        }
-        
-        public FictionBooksPage SubmitPriceFilter()
-        {
-            FilterByPrice.Click();
-            return this;
-        }
+        }        
 
         public int? GetMinPrice()
         {

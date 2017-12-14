@@ -5,6 +5,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Threading;
+using TestFramework.Contexts;
 using TestFramework.Pages;
 
 namespace TestsUseFramework
@@ -37,37 +38,33 @@ namespace TestsUseFramework
         public void NegativeMinPriceShouldUpdatePriceToMinimalAvailable()
         {
             //Arrange
-            var booksResultsPage = new FictionBooksPage(driver);
+            var booksResultsPage = new FilterPage(driver);
             var minPriceValueToSet = 20;
             var maxPriceValueToSet = 250;
 
             //Act
-            booksResultsPage
-                .SetPrice(minPriceValueToSet, maxPriceValueToSet).SubmitPriceFilter();
-
-            var actualMinimumPrice = booksResultsPage.GetMinPrice();
-            var actualMaximumPrice = booksResultsPage.GetMaxPrice();
+            FilteringContext.FilterByPriceRange(booksResultsPage, minPriceValueToSet, maxPriceValueToSet);
 
             //Assert
-            actualMinimumPrice.Should().Be(minPriceValueToSet);
-            actualMaximumPrice.Should().Be(maxPriceValueToSet);
+            (FilteringContext.VerifyMinPriceValue(booksResultsPage, minPriceValueToSet) 
+                && FilteringContext.VerifyMaxPriceValue(booksResultsPage, maxPriceValueToSet)).Should().BeTrue();
         }
 
-    //    [TestMethod]
-    //    public void SortByPrice()
-    //    {
-    //        //Arrange
-    //        var booksResultsPage = new FictionBooksPage(driver);
-    //        var minPriceValueToSet = 20;
-    //        var maxPriceValueToSet = 250;
+        [TestMethod]
+        public void FilterByPrice()
+        {
+            //Arrange
+            var booksResultsPage = new FilterPage(driver);
+            var bookPage = new GoodsItemPage(driver);
+            var minpriceValueToSet = 20;
+            var maxpriceValueToSet = 250;
 
-    //        //Act
-    //        booksResultsPage
-    //            .SetPrice(minPriceValueToSet, maxPriceValueToSet).SubmitPriceFilter();
+            //Act
+            FilteringContext.FilterByPriceRange(booksResultsPage, minpriceValueToSet, maxpriceValueToSet);
+            ResultSetContext.SelectElement(booksResultsPage, 0);
 
-    //        booksResultsPage.ResultSet.First().Click();
-            
-    //        Assert.IsTrue((booksResultsPage.GetPrice()>=20) && (booksResultsPage.GetPrice() <= 250));
-    //}
+            //Assert
+            GoodStateVerificationContext.VerifyItemPrice(bookPage, minpriceValueToSet, maxpriceValueToSet);
+        }
     }
 }
