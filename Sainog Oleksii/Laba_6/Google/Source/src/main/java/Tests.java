@@ -58,7 +58,6 @@ public class Tests {
         String exePath = "c:\\Program Files (x86)\\Google\\Chrome\\chromedriver.exe";
         System.setProperty("webdriver.chrome.driver", exePath);
         driver = new ExpandedChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @Before
