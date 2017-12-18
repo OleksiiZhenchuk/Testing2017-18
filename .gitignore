@@ -12,3 +12,4 @@ bin
 #Java
 *.class
 *.xml
+*.iml
