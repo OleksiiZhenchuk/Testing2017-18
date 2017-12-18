@@ -8,3 +8,8 @@ obj
 *.suo
 packages
 bin
+
+#Java
+*.class
+*.xml
+*.iml
