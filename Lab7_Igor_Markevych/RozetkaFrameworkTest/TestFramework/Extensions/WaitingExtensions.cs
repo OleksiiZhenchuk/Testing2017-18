@@ -80,8 +80,13 @@ namespace TestFramework.Extensions
 
         public static void WaitUntilUrlIsChanged(BasePage page, string url)
         {
+            int i = 0;
             while (url == page.GetDriver().Url)
+            {
+                i++;
                 System.Threading.Thread.Sleep(50);
+                if (i==200) throw new Exception("Custom Waiter Timeouted!");
+            }
         }
     }
 }
