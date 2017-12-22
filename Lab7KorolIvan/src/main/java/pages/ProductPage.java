@@ -25,11 +25,30 @@ public class ProductPage extends BasePage{
         //Waiters.thredsleep(2000);
 
         By by = new By.ByCssSelector("#popup-checkout");
-        Waiters.waitExpected(getDriver(), by, 5000, 50 );
+        //Waiters.waitExpected(getDriver(), by, 5000, 50 );
+        Waiters.thredsleep(2000);
         submitButton = getDriver().findElement(by);
-        Waiters.waitClickableAndDisplayed(getDriver(), submitButton, 5000, 50 );
+        //Waiters.waitClickableAndDisplayed(getDriver(), submitButton, 5000, 50 );
         submitButton.click();
         return new CheckOut(getDriver()) ;
+    }
+
+    public WebElement getBuyButton() {
+        return buyButton;
+    }
+
+    public ProductPage setBuyButton(WebElement buyButton) {
+        this.buyButton = buyButton;
+        return this;
+    }
+
+    public WebElement getSubmitButton() {
+        return submitButton;
+    }
+
+    public ProductPage setSubmitButton(WebElement submitButton) {
+        this.submitButton = submitButton;
+        return this;
     }
 }
 

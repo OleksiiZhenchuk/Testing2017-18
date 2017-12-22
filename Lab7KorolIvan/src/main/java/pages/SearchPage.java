@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 
 public class SearchPage extends BasePage {
+    private static final String ROZQTKA_URL = "https://rozetka.com.ua/ua/vino/c4594285/filter/";
 
     public SearchPage (WebDriver driver){
         super(driver);
@@ -36,18 +37,18 @@ public class SearchPage extends BasePage {
     @FindBys(
             @FindBy(xpath = "//*[@id='sort_producer']/li/label")
     )
-    List<HtmlLabel> myFirstLables;
+    private List<HtmlLabel> myFirstLables;
 
     private HtmlLabel myFirstLable;
 
-    private SearchPage yet(){
-        By by = new By.ByCssSelector("#filter_parameters_form > div:nth-child(2) > div.pos-fix > a:nth-child(2)");
-        Waiters.waitClickable(getDriver(), by, 5000, 5);
-        WebElement clickYet = getDriver().findElement(by);
-        Waiters.waitClickableAndDisplayed(getDriver(), clickYet, 5000, 500);
-        clickYet.click();
-        return this;
-    }
+    @FindBys(
+            @FindBy(xpath = "//*[@id=\"catalog_goods_block\"]/div/div/div/div/div[@class='g-i-tile-i-box g-i-large-tile-i-box']" +
+                    "/div/div[@name='prices_active_element_original']/div[@name='buy_catalog_small']")
+    )
+    private List<WebElement> miniBaskets;
+
+    private Basket basket;
+
 
     public SearchPage  setMinimumPrice(Integer price){
         if(price == null) return this;
@@ -70,44 +71,53 @@ public class SearchPage extends BasePage {
         return this;
     }
 
-    public ProductPage chooseProducer(String producer)throws NotExistProducerExeption, NotHaveProductsExeption{
-        yet();
-        int current = -1;
-        for (int i = 0; i < myFirstLables.size(); i++) {
-            if (myFirstLables.get(i).getLableName().equalsIgnoreCase(producer.trim())){
-                current = i;
-                break;
-            }
-        }
 
-        if(current == -1){
-            throw new NotExistProducerExeption();
-        }
-        else {
-            myFirstLable = myFirstLables.get(current);
-            if(myFirstLable.getCounterLable() == 0 ){
-                throw new NotHaveProductsExeption();
-            }
-            else {
-            Waiters.thredsleep(1000);
-            myFirstLable.click();
-            }
-        }
-
-        By linksXpath = new By.ByXPath("//*[@id='catalog_goods_block']/div/div/div/div/div/div/*[@class='g-i-tile-i-title clearfix']/a");
-        Waiters.waitUrlContain(getDriver(), producer, 10000, 250);
-        List<WebElement> links = getDriver().findElements(linksXpath);
-        Random rnd = new Random(System.currentTimeMillis());
-        int pageNum = rnd.nextInt(links.size());
-        //System.out.println(pageNum);
-        long to = System.currentTimeMillis();
-        Waiters.waitClickableAndDisplayed(getDriver(), links.get(pageNum), 10000, 250);
-        long after = System.currentTimeMillis();
-        //System.out.println((after - to));
-
-        links.get(pageNum).click();
-        //System.out.println(links.size());
-        return new ProductPage(getDriver());
+    public Basket getBasket() {
+        return new Basket(getDriver());
     }
 
+    public TextField getMinPrice() {
+        return minPrice;
+    }
+
+    public SearchPage setMinPrice(TextField minPrice) {
+        this.minPrice = minPrice;
+        return this;
+    }
+
+    public TextField getMaxPrice() {
+        return maxPrice;
+    }
+
+    public SearchPage setMaxPrice(TextField maxPrice) {
+        this.maxPrice = maxPrice;
+        return this;
+    }
+
+    public WebElement getSubmitPriceButton() {
+        return submitPriceButton;
+    }
+
+    public SearchPage setSubmitPriceButton(WebElement submitPriceButton) {
+        this.submitPriceButton = submitPriceButton;
+        return this;
+    }
+
+    public List<HtmlLabel> getMyFirstLables() {
+        return myFirstLables;
+    }
+
+    public SearchPage setMyFirstLables(List<HtmlLabel> myFirstLables) {
+        this.myFirstLables = myFirstLables;
+        return this;
+    }
+
+    public HtmlLabel getMyFirstLable() {
+        return myFirstLable;
+    }
+
+    public SearchPage setMyFirstLable(HtmlLabel myFirstLable) {
+        this.myFirstLable = myFirstLable;
+        return this;
+    }
 }

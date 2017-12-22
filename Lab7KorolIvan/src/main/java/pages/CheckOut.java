@@ -56,4 +56,49 @@ public class CheckOut extends BasePage{
         email.setValue(person.getEmail());
         return clickOnButtonContinue();
     }
+
+    public TextField getNameAndSurname() {
+        return nameAndSurname;
+    }
+
+    public CheckOut setNameAndSurname(TextField nameAndSurname) {
+        this.nameAndSurname = nameAndSurname;
+        return this;
+    }
+
+    public TextField getLocality() {
+        return locality;
+    }
+
+    public CheckOut setLocality(TextField locality) {
+        this.locality = locality;
+        return this;
+    }
+
+    public TextField getPhone() {
+        return phone;
+    }
+
+    public CheckOut setPhone(TextField phone) {
+        this.phone = phone;
+        return this;
+    }
+
+    public TextField getEmail() {
+        return email;
+    }
+
+    public CheckOut setEmail(TextField email) {
+        this.email = email;
+        return this;
+    }
+
+    public WebElement getButtonToContinue() {
+        return buttonToContinue;
+    }
+
+    public CheckOut setButtonToContinue(WebElement buttonToContinue) {
+        this.buttonToContinue = buttonToContinue;
+        return this;
+    }
 }
