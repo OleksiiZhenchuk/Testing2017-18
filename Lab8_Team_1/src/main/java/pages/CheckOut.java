@@ -9,7 +9,7 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import helpers.*;
 import org.openqa.selenium.support.ui.Wait;
-import utill.Waiters;
+import utils.Waiters;
 
 import java.util.concurrent.TimeUnit;
 
@@ -42,7 +42,6 @@ public class CheckOut extends BasePage{
     {
         try {
             //Waiters.waitClickableAndDisplayed(getDriver(), buttonToContinue, 5000, 2000);
-            Waiters.thredsleep(2000);
             buttonToContinue.click();
 
         }

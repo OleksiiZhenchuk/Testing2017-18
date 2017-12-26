@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
-import utill.Waiters;
+import utils.Waiters;
 
 
 import java.util.List;
@@ -29,7 +29,6 @@ public class ProductPage extends BasePage{
     public CheckOut buyAndSubmit(){
         buyButton.click();
         By by = new By.ByCssSelector("#popup-checkout");
-        Waiters.thredsleep(2000);
         submitButton = getDriver().findElement(by);
         submitButton.click();
         return new CheckOut(getDriver()) ;

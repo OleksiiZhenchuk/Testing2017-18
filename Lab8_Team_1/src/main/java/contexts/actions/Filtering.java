@@ -11,11 +11,12 @@ import java.util.Random;
 
 public class Filtering {
 
-    private static SearchPage yet(BasePage page){
+    private static SearchPage yet(BasePage page) throws InterruptedException {
         By by = new By.ByCssSelector("#filter_parameters_form > div:nth-child(2) > div.pos-fix > a:nth-child(2)");
         Waiters.waitClickableAndDisplayed(page.getDriver(),by,3000);
         WebElement clickYet = page.getDriver().findElement(by);
         Waiters.waitClickableAndDisplayed(page.getDriver(), clickYet, 3000);
+        Thread.sleep(2000);
         clickYet.click();
         return (SearchPage) page;
     }
@@ -25,7 +26,7 @@ public class Filtering {
         return page;
     }
 
-    public static SearchPage chooseProducer(SearchPage page, String producer)throws NotExistProducerExeption, NotHaveProductsExeption{
+    public static SearchPage chooseProducer(SearchPage page, String producer) throws NotExistProducerExeption, NotHaveProductsExeption, InterruptedException {
         yet(page);
         int current = -1;
         for (int i = 0; i < page.getMyFirstLables().size(); i++) {

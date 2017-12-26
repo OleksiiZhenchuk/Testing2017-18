@@ -2,7 +2,7 @@ package elements;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import utill.Methods;
+import utils.Methods;
 
 
 public class HtmlLabel extends Element {

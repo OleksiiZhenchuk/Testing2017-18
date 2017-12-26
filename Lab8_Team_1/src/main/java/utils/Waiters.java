@@ -34,10 +34,7 @@ public class Waiters {
         waiter.until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(element)));
     }
 
-    public static void waitForLoad(WebDriver driver, int time) {
-        Boolean complete = new WebDriverWait(driver, time).until((ExpectedCondition<Boolean>) wd ->
-                ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
-    }
+
 
     public static void waitList(final WebDriver driver, List<WebElement> elements, int time){
         Wait waiter = new WebDriverWait(driver,time);
