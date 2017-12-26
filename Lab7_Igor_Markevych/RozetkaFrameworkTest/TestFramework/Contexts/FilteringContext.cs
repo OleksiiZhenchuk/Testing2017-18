@@ -58,16 +58,26 @@ namespace TestFramework.Contexts
             else {
                 int j=page.CheckboxIzdSet.Count;
                 int i = 0;
-                while (page.CheckboxIzdSet[i].GetText().IndexOf(name + " (") != 0)
+                while (page.CheckboxIzdSet[i].GetText()[0]!=name[0])
                 {
-                    if (name[0] < page.CheckboxIzdSet[j / 2].GetText()[0])
-                        j = (j+i) / 2;
+                    if (name[0]<page.CheckboxIzdSet[j / 2].GetText()[0])
+                        j = (j-i) / 2;
                     else
                         i = i + (j-i) / 2 ;
                 }
-                if (page.CheckboxIzdSet[i].GetText().Equals(name + " (0)"))
+                int k = i-1;
+                while (page.CheckboxIzdSet[k].GetText()[0] == name[0] && page.CheckboxIzdSet[k].GetText().IndexOf(name + " (") != 0)
+                    k--;
+                if (page.CheckboxIzdSet[k].GetText().IndexOf(name + " (") != 0)
+                {
+                    k = i + 1;
+                    while (page.CheckboxIzdSet[k].GetText()[0] == name[0] && page.CheckboxIzdSet[k].GetText().IndexOf(name + " (") != 0)
+                        k++;
+                }
+
+                if (page.CheckboxIzdSet[k].GetText().Equals(name + " (0)"))
                     throw new Exception("No products with such filtering parameters.");
-                page.CheckboxIzdSet[i].Click();
+                page.CheckboxIzdSet[k].Click();
             }
             WaitingExtensions.WaitUntilUrlIsChanged(page,url);
             return page;
