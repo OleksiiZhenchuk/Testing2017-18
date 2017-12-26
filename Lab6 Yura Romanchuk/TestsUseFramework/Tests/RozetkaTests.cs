@@ -3,15 +3,13 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using PageObjects.Pages;
 
-namespace Tests.Tests
+namespace TestsUseFramework.Tests
 {
     [TestClass]
     public class RozetkaTests
     {
         private IWebDriver driver;
         private string _url = "https://rozetka.com.ua/hudojestvennaya-literatura/c4326593/";
-
-
 
         [TestInitialize]
         public void TestInitialize()

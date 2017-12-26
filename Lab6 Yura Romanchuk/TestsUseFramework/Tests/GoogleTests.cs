@@ -1,12 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using System.Drawing.Imaging;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using PageObjects.Pages;
-using System;
-using System.Drawing.Imaging;
+using Tests;
 
-
-namespace Tests.Tests
+namespace Google.Tests.Tests
 {
     [TestClass]
     public class GoogleTests
@@ -36,8 +36,8 @@ namespace Tests.Tests
         {
             //Arrange
             var ResultsPage = new GoogleHomePage(driver);
-            string word = "футбол";
-            string word1 = "Барселона";
+            string word = "Кнопка";
+            string word1 = "канцтовари";
             bool isCorrect1;
             bool isCorrect2=true;
             int count = 2;
