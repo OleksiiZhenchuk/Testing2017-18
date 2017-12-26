@@ -4,6 +4,8 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RozetkaPage extends Page{
 
@@ -23,8 +25,8 @@ public class RozetkaPage extends Page{
     public void setMinPrice(Integer min){
         minPriceField.sendKeys(min.toString());
         priceButton.sendKeys(Keys.ENTER);
-        String url = driver.getCurrentUrl();
-        driver.get(url);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        List<WebElement> temp = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("g-price-uah")));
     }
 
     public Integer getMinPrice(){
