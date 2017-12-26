@@ -9,8 +9,7 @@ namespace RozetkaTestAutomationFrameworkUsage.Contexts.Actions
     {
         public static WineListPage ClickOnMore(this WineListPage page, Waiters wait)
         {
-            wait.waitForClickableElement(By.Name(page.locLinkMore));
-            page.LinkMore.Click();
+            wait.WaitUntilElementAppears(page.LinkMore);
             return page;
         }
 
@@ -20,7 +19,7 @@ namespace RozetkaTestAutomationFrameworkUsage.Contexts.Actions
             {
                 if (Regex.IsMatch(element.getText(), country))
                 {
-                    element.Click();
+                    wait.WaitUntilElementAppears(element);
                     break;
                 }
             }
@@ -29,8 +28,7 @@ namespace RozetkaTestAutomationFrameworkUsage.Contexts.Actions
 
         public static GoodsItemPage ClickOnButtonBuy(GoodsItemPage page, Waiters wait)
         {
-            wait.waitForVisibilityElement(By.ClassName(page.locBuy));
-            page.Buy.Click();
+            wait.WaitUntilElementAppears(page.Buy);
             return page;
         }
 
