@@ -14,8 +14,6 @@ public class Page {
 
     public Page(ChromeDriverEx driver){
         this.driver = driver;
-//        PageFactory.initElements(driver,this); mine
-        //julias
         PageFactory.initElements(new CustomFieldDecorator(driver), this);
     }
 
