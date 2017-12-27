@@ -75,7 +75,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Google\PageObjects.csproj">
+    <ProjectReference Include="..\TestFramework\PageObjects.csproj">
       <Project>{372893bc-b196-491f-9b81-e7391243f43f}</Project>
       <Name>PageObjects</Name>
     </ProjectReference>

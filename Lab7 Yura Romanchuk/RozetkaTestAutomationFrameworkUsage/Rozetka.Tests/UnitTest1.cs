@@ -25,7 +25,7 @@ namespace Rozetka.Tests
 
             driver = new ChromeDriver(options);
             driver.Navigate().GoToUrl(_url);
-            new WebDriverWait(driver, TimeSpan.FromSeconds(60)).Until(d => d.Url == _url);
+            new WebDriverWait(driver, TimeSpan.FromSeconds(60)).Until(driver1 => ((IJavaScriptExecutor)driver).ExecuteScript("return document.readyState").Equals("complete"));
         }
 
         [TestCleanup]

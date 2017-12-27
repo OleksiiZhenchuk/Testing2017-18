@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PageObjects", "Google\PageObjects.csproj", "{372893BC-B196-491F-9B81-E7391243F43F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PageObjects", "TestFramework\PageObjects.csproj", "{372893BC-B196-491F-9B81-E7391243F43F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Google.Tests\Tests.csproj", "{06666C80-1C28-48D8-9BE5-2F2A063EAE58}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "TestsUseFramework\Tests.csproj", "{06666C80-1C28-48D8-9BE5-2F2A063EAE58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
